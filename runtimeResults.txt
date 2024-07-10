@@ -1,0 +1,24 @@
+Note that:
+
+- When calculating the parallel speed-up S, the time output by the code was used, which corresponds
+  to the parallel calculation and does not include reading in the file or performing the serial check
+
+- The serial execution time is the time output by the code when run with a single process
+
+
+No. Process:                        Mean time (average of 3 runs)           Parallel speed-up, S:
+===========                         ============================:           ====================
+1                                   0.0003548463333 seconds                 1.0
+2                                   0.0004444916667 seconds                 0.7983194284
+4                                   0.0005091033333 seconds                 0.6970025731
+
+Architecture that the timing runs were performed on:
+
+8 CPUs, 16 cores, Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
+
+One reason the parallel speed-up decreases as the number of processes increases is because communicating
+between processes takes time which is not required when the program is run with one process. Also,
+additional computations and tasks need to be performed with multiple processes such as scattering data
+between them which are not performed using one process leading to performance penalties with more processes.
+Finally, blocking communication is used meaning a process can potentially be sat idle waiting for another
+process to call the corresponding function to initiate communication causing time to be spent doing nothing.
