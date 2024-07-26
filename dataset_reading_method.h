@@ -8,7 +8,7 @@ float* readDataFromFile( int *size )
 {
     // Try to open up the file for reading
     FILE *fileIn = fopen( "dataSet.txt", "rt" );
-    if( !fileIn )
+    if ( !fileIn )
     {
         printf( "Could not open the local file 'dataSet.txt' for reading.\n" );
         return NULL;
@@ -20,7 +20,7 @@ float* readDataFromFile( int *size )
     // The first line should be a single integer, corresponding to the total number of data items
     fgets( line, MAX_LINE_LENGTH, fileIn );
     *size = atoi( line );
-    if( *size <= 0 )
+    if ( *size <= 0 )
     {
         printf( "Could not parse first line of 'dataSet.txt' as a positive integer; has the file been corrupted?\n" );
         fclose( fileIn );
@@ -28,8 +28,8 @@ float* readDataFromFile( int *size )
     }
 
     // Allocate memory for the full data list
-    float *data = (float*) malloc( (*size)*sizeof(float) );
-    if( data==NULL )
+    float *data = (float*) malloc( (*size) * sizeof(float) );
+    if ( data == NULL )
     {
         printf( "Could not allocate memory for the %i entries expected for the data list.\n", *size );
         fclose( fileIn );
@@ -38,7 +38,7 @@ float* readDataFromFile( int *size )
 
     // Read in the floats line by line
     int lineNum;
-    for( lineNum=0; lineNum<*size; lineNum++ )
+    for ( lineNum = 0; lineNum < *size; lineNum++ )
     {
         fgets( line, MAX_LINE_LENGTH, fileIn );
         data[lineNum] = atof( line );
@@ -52,5 +52,5 @@ float* readDataFromFile( int *size )
 // Displays the output of the mean and variance
 void finalMeanAndVariance( float mean, float variance )
 {
-    printf( "FINAL RESULT: Mean=%g and Variance=%g.\n", mean, variance );
+    printf( "FINAL RESULT: Mean = %g and Variance = %g.\n", mean, variance );
 }
